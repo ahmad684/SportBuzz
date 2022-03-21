@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "41388326947",
+    "project_id": "sportbuzz-712bf",
+    "storage_bucket": "sportbuzz-712bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41388326947:android:855a3de31928a6ee577196",
+        "android_client_info": {
+          "package_name": "com.example.sportsbuzz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41388326947-7a1dg72iob4ek8q9h4t6fe948ihtvnbc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sportsbuzz",
+            "certificate_hash": "7bf1e739a6df18e361d7354f6cbfe74123b6f3c4"
+          }
+        },
+        {
+          "client_id": "41388326947-erbm203vvcthba4fs81mthaaae82hpee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtW-lZlZ6xgZuMLf_BYQEVKqpgiFe66F4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41388326947-erbm203vvcthba4fs81mthaaae82hpee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
