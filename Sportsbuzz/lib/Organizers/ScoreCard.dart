@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=FlutterLocalNotificationsPlugin();
 var Team1,Team2;
 var toss;
 bool ts=false;
@@ -37,6 +41,9 @@ class _MatchCardState extends State<MatchCard> {
   @override
   void initState() {
     ts=true;
+
+    initializeSetting();
+    tz.initializeTimeZones();
     // TODO: implement initState
     super.initState();
   }
@@ -235,12 +242,14 @@ class _MatchCardState extends State<MatchCard> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(onPressed: (){
                                   if(st){
+                                    displayNotification(scor.toString(), over.toString());
                                     setState(() {
                                       scor=scor+0;
                                       ball=ball+1;
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
@@ -254,9 +263,10 @@ class _MatchCardState extends State<MatchCard> {
 
                                       _out=_out+1;
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
-                                      }
+                                      }displayNotification(Team1+"&"+Team2, "Out but NO BALL "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                     });}
 
 
@@ -275,11 +285,14 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -292,11 +305,15 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
+                                        displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -313,7 +330,9 @@ class _MatchCardState extends State<MatchCard> {
                                       ball=ball+1;
                                       if(ball==7){
 
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
@@ -323,6 +342,7 @@ class _MatchCardState extends State<MatchCard> {
                                   else if(wide){
                                     setState(() {
                                       scor=scor+1;
+                                      displayNotification(Team1+"&"+Team2, "! Wide  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                     });
 
                                   }
@@ -332,6 +352,7 @@ class _MatchCardState extends State<MatchCard> {
                                   else if(no_ball){
                                     setState(() {
                                       scor=scor+1;
+                                      displayNotification(Team1+"&"+Team2, "! NO BAll  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                     });
 
                                   }
@@ -344,6 +365,7 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
@@ -356,11 +378,14 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('All Team Out', 'Target:'+scor.toString(), 'OK');
 
                                       }
@@ -373,11 +398,14 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -395,6 +423,7 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
@@ -423,6 +452,7 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
@@ -435,11 +465,14 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -452,11 +485,14 @@ class _MatchCardState extends State<MatchCard> {
                                       if(ball==7){
 
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -472,8 +508,10 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+3;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                     });
@@ -499,8 +537,10 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+3;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                     });}
@@ -510,12 +550,16 @@ class _MatchCardState extends State<MatchCard> {
                                     setState(() {
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -526,12 +570,17 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+3;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
+
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -570,10 +619,13 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+4;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
+                                      displayNotification(Team1+"&"+Team2, "! 4 Runs  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                     });
 
                                   }
@@ -597,8 +649,10 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+4;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                     });}
@@ -608,12 +662,16 @@ class _MatchCardState extends State<MatchCard> {
                                     setState(() {
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -624,12 +682,15 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+4;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! 4 runs & Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -645,8 +706,10 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+5;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                     });
@@ -673,12 +736,16 @@ class _MatchCardState extends State<MatchCard> {
                                     setState(() {
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -695,11 +762,14 @@ class _MatchCardState extends State<MatchCard> {
                                       scor=scor+6;
                                       ball=ball+1;
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                     });
+                                    displayNotification(Team1+"&"+Team2, "! 6 runs "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
 
                                   }
 
@@ -707,17 +777,22 @@ class _MatchCardState extends State<MatchCard> {
 
 
 
-                                   if(out){
+                                   else if(out){
 
                                     setState(() {
                                       ball=ball+1;
+
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
+                                      displayNotification(Team1+"&"+Team2, "! Out  "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
@@ -725,14 +800,18 @@ class _MatchCardState extends State<MatchCard> {
                                    else if(st&out){
                                      setState(() {
                                        scor=scor+6;
+                                       displayNotification(Team1+"&"+Team2, "hit for SIX -But hits Out "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                        ball=ball+1;
                                        if(ball==7){
-                                         rr=(scor/over);
+
                                          over=over+1;
+                                         displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                         rr=(scor/over);
                                          ball=0;
                                        }
                                        _out=_out+1;
                                        if(_out==11){
+                                         displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                          _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                        }
@@ -748,6 +827,7 @@ class _MatchCardState extends State<MatchCard> {
                                   if(st&no_ball){
                                     setState(() {
                                       scor=scor+7;
+                                      displayNotification(Team1+"&"+Team2, "hit for SIX -on a NO BAll "+scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
 
                                     });
 
@@ -762,20 +842,25 @@ class _MatchCardState extends State<MatchCard> {
 
                                     setState(() {
                                       ball=ball+1;
+                                      displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
                                       if(ball==7){
-                                        rr=(scor/over);
+
                                         over=over+1;
+                                        displayNotification(Team1+"&"+Team2, scor.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                        rr=(scor/over);
                                         ball=0;
                                       }
                                       _out=_out+1;
                                       if(_out==11){
+                                        displayNotification(Team1+"&"+Team2, "A!Ll OUT "+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+
                                         _showMyDialog('Ining Completed', 'Targer'+scor.toString(), 'OK');
 
                                       }
                                     });}
 
 
-                                }, child: Text('6'),style: ElevatedButton.styleFrom(
+                                }, child: Text('7'),style: ElevatedButton.styleFrom(
                                     primary: Colors.black),),
                               ),
 
@@ -791,6 +876,8 @@ class _MatchCardState extends State<MatchCard> {
                                 child: ElevatedButton(onPressed: (){
                                setState(() {
                                  target=scor+1;
+                                 displayNotification(Team1+"&"+Team2, "Ining Completed"+target.toString()+"-"+_out.toString()+" ("+over.toString()+')');
+                                 rr=(scor/over);
                                  scor=0;
                                  _out=0;
                                  ining=2;
@@ -850,7 +937,7 @@ class _MatchCardState extends State<MatchCard> {
                     Navigator.pop(context);
                   });
 
-                }else{
+                }else if(scor==target){
                   setState(() {
                     target=scor+1;
                     scor=0;
@@ -906,5 +993,25 @@ class _MatchCardState extends State<MatchCard> {
       },
     );
   }
+  Future<void> displayNotification(String tema,String numbers) async {
+    flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        tema,
+        numbers,
 
+        tz.TZDateTime.now(tz.local).add(Duration(seconds: 1)),
+        NotificationDetails(
+            android: AndroidNotificationDetails('channel id', 'channel name')),
+        uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: true);
+
+  }
+
+  void initializeSetting() async {
+    var initializeSetting = new AndroidInitializationSettings('ic_launcher');
+    var androidSetting = new InitializationSettings(android: initializeSetting);
+    await flutterLocalNotificationsPlugin.initialize(androidSetting);
+  }
 }
+
